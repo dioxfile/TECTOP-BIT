@@ -1,3 +1,3 @@
 # TECTOP-BIT
-![alt text](https://github.com/dioxfile/TECTOP-BIT/raw/master/tectopbit.jpeg)
+![alt text](https://github.com/dioxfile/TECTOP-BIT/tree/main/tectopbit.jpeg)
 TI Classes
