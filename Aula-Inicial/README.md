@@ -1,2 +1,2 @@
-# Aula Inicial Link YouTube: 
-## 1 - https://www.youtube.com/@Techtopbit
+# Aula Inicial Link YouTube: O QUE É O CANAL TECHTOPBIT.
+## Link -  [Canal TecTopBit - Apresentação](https://www.youtube.com/watch?v=XsU0toIn0oY)
