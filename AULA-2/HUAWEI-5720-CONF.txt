@@ -1,0 +1,284 @@
+!Software Version V200R019C10SPC500
+#
+sysname LAB-DE-REDES
+#
+vlan batch 113 300 400 500
+#
+loopback-detect auto disable
+#
+authentication-profile name default_authen_profile
+authentication-profile name dot1x_authen_profile
+authentication-profile name dot1xmac_authen_profile
+authentication-profile name mac_authen_profile
+authentication-profile name multi_authen_profile
+authentication-profile name portal_authen_profile
+#
+undo lldp enable
+#
+ecmp local-preference disable
+#
+route low-priority enable
+#
+set flow-change-ratio input-broadcast-detect disable
+#
+undo portal url-encode enable
+portal pass dns enable                    
+#                                         
+diffserv domain default                   
+#                                         
+radius-server template default            
+ radius-server shared-key cipher %^%#{h/EA|CRi=%"3zY)P[N$\.2|/iY`]2-Gny;1~UN%%^%#
+radius-server session-manage any          
+#                                         
+rsa peer-public-key 192.168.2.253         
+ public-key-code begin                    
+  30820109                                
+    02820100                              
+      B3696A21 ACAB2E14 D8C70497 5D0BF5FF 64347B46 47456EB5 D0981E25 B4E15848
+      FF779C3E 17402519 9DF11298 1570D0ED 1B6566D6 DBC4677C 1583545D 1AE7D86D
+      6AEBC220 C7EE9DDF 252D8FBE 22A31A95 05BD39C1 9597FE55 1DC7C2C4 26CE7BC3
+      8819403B E3B97DC3 BFE6A432 9CBD12C7 5CF18558 5110CC71 93F34319 43373A6D
+      B2F8E58D 7FA74031 83E8C0A9 9AA9C916 94BDC42F B8A903B2 68DD73D0 4D2FD494
+      3C3E3ED1 5E19CA94 D10A4416 C955345C 12A26189 9AA6EC9A 54FF9CB4 023E30FD
+      AF45A9B0 ADEF0FC8 914F5C91 1912F039 7570931B ECB6F4BB FE013BA1 08BA4182
+      DEB1A586 7CE537F7 827D8BDD D036E190 B3E9AE27 4B21D29F F1C228D7 3E0F8491
+    0203                                  
+      010001                              
+ public-key-code end                      
+peer-public-key end                       
+#                                         
+pki realm default                         
+#                                         
+acl number 2025                           
+ rule 5 permit source 172.168.20.21 0     
+ rule 10 permit source 10.0.0.0 0.0.0.255 
+ rule 5000 deny                           
+#                                         
+free-rule-template name default_free_rule 
+#                                         
+portal-access-profile name portal_access_profile
+#                                         
+drop-profile default                      
+#                                         
+vlan 113                                  
+ description PF-SENSE                     
+vlan 300                                  
+ description Servers                      
+vlan 400                                  
+ description COMPUTADORES                 
+vlan 500                                  
+ description Wi-Fi                        
+#                                         
+aaa                                       
+ authentication-scheme default            
+  authentication-mode local               
+ authentication-scheme radius             
+  authentication-mode radius              
+ authorization-scheme default             
+  authorization-mode local                
+ accounting-scheme default                
+  accounting-mode none                    
+ domain default                           
+  authentication-scheme default           
+  accounting-scheme default               
+ domain default_admin                     
+  authentication-scheme default           
+  accounting-scheme default               
+ local-user admin password irreversible-cipher $1c$[J6TBUj@C.$2JjI(7XrwAd#bpPH0Q'*5K_tX\h-t5NcKdBiiW)N$
+ local-user admin privilege level 15      
+ local-user admin ftp-directory flash:    
+ local-user admin service-type telnet terminal ssh ftp
+#                                         
+interface Vlanif300                       
+ description GERENCIA-SWITCH              
+ ip address 172.168.1.253 255.255.255.0   
+#                                         
+interface MEth0/0/1                       
+ description PORTA-GERENCIA               
+ ip address 10.0.0.253 255.255.255.0      
+#                                         
+interface GigabitEthernet0/0/1            
+ description SERVER-13-SM                 
+ port link-type trunk                     
+ port trunk pvid vlan 300                 
+ port trunk allow-pass vlan 113 300 400 500
+ stp disable                              
+#                                         
+interface GigabitEthernet0/0/2            
+ description SERVER-12-SM                 
+ port link-type trunk                     
+ port trunk pvid vlan 300                 
+ port trunk allow-pass vlan 113 300 400 500
+ stp disable                              
+#                                         
+interface GigabitEthernet0/0/3            
+ description SERVER-11-SM                 
+ port link-type trunk                     
+ port trunk pvid vlan 300                 
+ port trunk allow-pass vlan 113 300 400 500
+ stp disable                              
+#                                         
+interface GigabitEthernet0/0/4            
+ description SERVER-10-SM                 
+ port link-type trunk                     
+ port trunk pvid vlan 300                 
+ port trunk allow-pass vlan 113 300 400 500
+ stp disable                              
+#                                         
+interface GigabitEthernet0/0/5            
+ description SERVER-9-SM                  
+ port link-type trunk                     
+ port trunk pvid vlan 300                 
+ port trunk allow-pass vlan 113 300 400 500
+ stp disable                              
+#                                         
+interface GigabitEthernet0/0/6            
+ description SERVER-8-SM                  
+ port link-type trunk                     
+ port trunk pvid vlan 300                 
+ port trunk allow-pass vlan 113 300 400 500
+ stp disable                              
+#                                         
+interface GigabitEthernet0/0/7            
+ description SERVER-7-SM                  
+ port link-type trunk                     
+ port trunk pvid vlan 300                 
+ port trunk allow-pass vlan 113 300 400 500
+ stp disable                              
+#                                         
+interface GigabitEthernet0/0/8            
+ description SERVER-6-SM                  
+ port link-type trunk                     
+ port trunk pvid vlan 300                 
+ port trunk allow-pass vlan 113 300 400 500
+ stp disable                              
+#                                         
+interface GigabitEthernet0/0/9            
+ description SERVER-5-SM                  
+ port link-type trunk                     
+ port trunk pvid vlan 300                 
+ port trunk allow-pass vlan 113 300 400 500
+ stp disable                              
+#                                         
+interface GigabitEthernet0/0/10           
+ description SERVER-4-DELL                
+ port link-type trunk                     
+ port trunk pvid vlan 300                 
+ port trunk allow-pass vlan 113 300 400 500
+ stp disable                              
+#                                         
+interface GigabitEthernet0/0/11           
+ description SERVER-3-DELL                
+ port link-type trunk                     
+ port trunk pvid vlan 300                 
+ port trunk allow-pass vlan 113 300 400 500
+ stp disable                              
+#                                         
+interface GigabitEthernet0/0/12           
+ description SERVER-2-DELL                
+ port link-type trunk                     
+ port trunk pvid vlan 300                 
+ port trunk allow-pass vlan 113 300 400 500
+ stp disable                              
+#                                         
+interface GigabitEthernet0/0/13           
+ description SERVER-1-DELL                
+ port link-type trunk                     
+ port trunk pvid vlan 300                 
+ port trunk allow-pass vlan 113 300 400 500
+#                                         
+interface GigabitEthernet0/0/14           
+ description PORTA-DE-ACESSO-VIA-CABO     
+ port link-type access                    
+ port default vlan 300                    
+#                                         
+interface GigabitEthernet0/0/15           
+ shutdown                                 
+#                                         
+interface GigabitEthernet0/0/16           
+ shutdown                                 
+#                                         
+interface GigabitEthernet0/0/17           
+ shutdown                                 
+#                                         
+interface GigabitEthernet0/0/18           
+ shutdown                                 
+#                                         
+interface GigabitEthernet0/0/19           
+ shutdown                                 
+#                                         
+interface GigabitEthernet0/0/20           
+ shutdown                                 
+#                                         
+interface GigabitEthernet0/0/21           
+ shutdown                                 
+#                                         
+interface GigabitEthernet0/0/22           
+ description REDE-WIFI                    
+ port link-type access                    
+ port default vlan 500                    
+#                                         
+interface GigabitEthernet0/0/23           
+ description COMPUTADORES                 
+ port link-type access                    
+ port default vlan 400                    
+#                                         
+interface GigabitEthernet0/0/24           
+ description WAN-INTERNET                 
+ port link-type trunk                     
+ port trunk allow-pass vlan 113           
+#                                         
+interface GigabitEthernet0/0/25           
+ shutdown                                 
+#                                         
+interface GigabitEthernet0/0/26           
+ shutdown                                 
+#                                         
+interface GigabitEthernet0/0/27           
+ shutdown                                 
+#                                         
+interface GigabitEthernet0/0/28           
+ shutdown                                 
+#                                         
+interface GigabitEthernet0/0/29           
+ shutdown                                 
+#                                         
+interface GigabitEthernet0/0/30           
+ shutdown                                 
+#                                         
+interface GigabitEthernet0/0/31           
+ shutdown                                 
+#                                         
+interface GigabitEthernet0/0/32           
+ shutdown                                 
+#                                         
+interface NULL0                           
+#                                         
+ip route-static 0.0.0.0 0.0.0.0 172.168.1.254 description GATEWAY->PFSENSE
+#                                         
+stelnet server enable                     
+scp server enable                         
+ssh user admin                            
+ssh user admin authentication-type password
+ssh user admin service-type all           
+ssh user admin sftp-directory flash:/     
+ssh client first-time enable              
+ssh server acl 2025                       
+#                                         
+easy-operation dtls disable               
+#                                         
+user-interface con 0                      
+ authentication-mode password             
+ set authentication password cipher $1a$`[L%:BHu%/$t''jH>aoJT_c%40^o1u6<T|tN+SvaI!]m;5Yzuu-$
+user-interface vty 0 4                    
+ authentication-mode aaa                  
+ protocol inbound all                     
+user-interface vty 16 20                  
+#                                         
+dot1x-access-profile name dot1x_access_profile
+#                                         
+mac-access-profile name mac_access_profile
+#                                         
+ops                                       
+#                                         
+return                     
